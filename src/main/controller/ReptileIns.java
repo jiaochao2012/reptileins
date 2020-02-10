@@ -23,6 +23,7 @@ import java.util.Map;
  * @author JC
  */
 public class ReptileIns {
+    //zhu
     private static final String ALLOWED_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.!~*'()";
 
 
