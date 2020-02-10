@@ -38,12 +38,12 @@ public class HttpClientUtil {
     private static int READ_TIME_OUT = 30 * 1000;
 
 
-    public static String doGet(String url) {
+    public static String doGet(String url, String proxyHost, Integer proxyPort) {
         CloseableHttpClient httpClient = null;
         CloseableHttpResponse response = null;
         String result = "";
         try {
-            HttpHost proxy = new HttpHost("127.0.0.1", 64562, "http");
+            HttpHost proxy = new HttpHost(proxyHost, proxyPort, "http");
             CredentialsProvider provider = new BasicCredentialsProvider();
             provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("账号", "密码"));
             httpClient = HttpClients.custom().setDefaultCredentialsProvider(provider).build();
@@ -96,13 +96,13 @@ public class HttpClientUtil {
      * @param jsonDataStr
      * @return result
      */
-    public static String postJson(String reqURL, String jsonDataStr) {
+    public static String postJson(String reqURL, String jsonDataStr, String proxyHost, Integer proxyPort) {
         CloseableHttpClient httpClient = null;
         HttpPost httpPost = null;
         String responseResult = null;
         CloseableHttpResponse response = null;
         try {
-            HttpHost proxy = new HttpHost("127.0.0.1", 64562, "http");
+            HttpHost proxy = new HttpHost(proxyHost, proxyPort, "http");
             CredentialsProvider provider = new BasicCredentialsProvider();
             provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("账号", "密码"));
             httpClient = HttpClients.custom().setDefaultCredentialsProvider(provider).build();

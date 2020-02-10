@@ -23,13 +23,13 @@ import java.util.Map;
  */
 public class ReptileIns {
 
+    private static String proxyHost = "127.0.0.1";
+    private static String proxyPort = "64562";
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
         //设置代理
-        String proxyHost = "127.0.0.1";
         System.setProperty("http.proxyHost", proxyHost);
-        String proxyPort = "64562";
         System.setProperty("http.proxyPort", proxyPort);
         System.setProperty("https.proxyHost", proxyHost);
         System.setProperty("https.proxyPort", proxyPort);
@@ -134,10 +134,12 @@ public class ReptileIns {
         Element element1 = script.get(14);
         String src1 = element1.attr("src");
         String url = "https://www.instagram.com" + src1;
-        String queryId = HttpClientUtil.doGet(url);
+        //请求分页数据，需要设置代理
+        String queryId = HttpClientUtil.doGet(url, proxyHost, Integer.valueOf(proxyPort));
         if (queryId == null || "".equals(queryId)) {
             return null;
         }
+        //TODO hash_code
         int i = queryId.lastIndexOf("queryId", queryId.lastIndexOf("queryId") - 10);
         queryId = queryId.substring(i + 9);
         queryId = queryId.substring(0, queryId.indexOf(",") - 1);
@@ -148,9 +150,9 @@ public class ReptileIns {
         String str = JSON.toJSONString(variables);
         //url编码
         String data = java.net.URLEncoder.encode(str, "UTF-8");
-        //请求分页数据
+        //请求分页数据,需要设置代理
         String moreUrl = "https://www.instagram.com/graphql/query/?query_hash=";
-        String pageData = HttpClientUtil.doGet(moreUrl + queryId + "&variables=" + data);
+        String pageData = HttpClientUtil.doGet(moreUrl + queryId + "&variables=" + data, proxyHost, Integer.valueOf(proxyPort));
         if (pageData == null || "".equals(pageData)) {
             return null;
         }
