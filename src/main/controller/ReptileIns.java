@@ -33,20 +33,16 @@ public class ReptileIns {
         System.setProperty("http.proxyPort", proxyPort);
         System.setProperty("https.proxyHost", proxyHost);
         System.setProperty("https.proxyPort", proxyPort);
-        //爬取页面
-        String url = "https://www.instagram.com/mobil1/?hl=en";
         try {
             List<Content> contentList = new ArrayList<>();
-            //每个页面间隔一秒
-            Thread.sleep(1000);
             //连接url
-            int timeout = 300000;
+            String url = "https://www.instagram.com/mobil1/?hl=en";
             //获取该链接首页数据
             Document doc = Jsoup.connect(url)
                     //模拟浏览器访问
                     .userAgent("User-Agent:Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36")
                     //设置超时
-                    .timeout(timeout).followRedirects(true)
+                    .timeout(30000).followRedirects(true)
                     .get();
             //解析数据
             Elements script = doc.getElementsByTag("script");
