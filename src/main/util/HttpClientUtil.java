@@ -45,7 +45,7 @@ public class HttpClientUtil {
         try {
             HttpHost proxy = new HttpHost("127.0.0.1", 64562, "http");
             CredentialsProvider provider = new BasicCredentialsProvider();
-            provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("Wei.liu@automax-singapore.com", "hema6666!"));
+            provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("账号", "密码"));
             httpClient = HttpClients.custom().setDefaultCredentialsProvider(provider).build();
             // 创建httpGet远程连接实例
             HttpGet httpGet = new HttpGet(url);
@@ -104,7 +104,7 @@ public class HttpClientUtil {
         try {
             HttpHost proxy = new HttpHost("127.0.0.1", 64562, "http");
             CredentialsProvider provider = new BasicCredentialsProvider();
-            provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("Wei.liu@automax-singapore.com", "hema6666!"));
+            provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("账号", "密码"));
             httpClient = HttpClients.custom().setDefaultCredentialsProvider(provider).build();
             httpPost = new HttpPost(reqURL);
             RequestConfig requestConfig = RequestConfig.custom()
